@@ -1,0 +1,70 @@
+<div th:include="/admin/adminheader.html" xmlns:th="http://www.w3.org/1999/xhtml"></div>
+<script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Add Your Events</h1>
+    <p class="mb-4">Chart.js is a third party plugin that is used to generate the charts in this theme. The charts below have been customized - for further customization options, please visit the <a target="_blank" href="https://www.chartjs.org/docs/latest/">official Chart.js documentation</a>.</p>
+
+    <!-- Content Row -->
+    <div class="row">
+
+
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="alert alert-dark" role="alert" th:text="${message}">
+                        </div>
+                        <form th:action="@{/admin/addeventdata}" method="post">
+                            <input  type="hidden" name="eventId" th:value="${singleEvent!=null}?${singleEvent.id}:''">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1"><b>Title of Event*</b></label>
+                                <input type="text" class="form-control" name="eventName" id="exampleInputEmail1"
+                                       aria-describedby="emailHelp" placeholder="eg: How to do moonwalk." th:value="${singleEvent!=null}?${singleEvent.eventName}:''">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1"><b>Location*</b></label>
+                                <input type="text" class="form-control" id="exampleInputEmail" name="eventLocation"
+                                placeholder="eg: a walkthrough" th:value="${singleEvent!=null}?${singleEvent.eventLocation}:''" >
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1"><b>Event Date*</b></label>
+                                <input type="text" class="form-control" id="exampleInputEmai" name="eventDate"
+                                       placeholder="eg: a walkthrough" th:value="${singleEvent!=null}?${singleEvent.eventDate}:''" >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="blog"><b></b>Event Description*</label>
+                                <textarea cols="40" rows="20" id="blog" name="eventDescription"  th:text="${singleEvent!=null}?${singleEvent.eventDescription}:''"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label th:for="eventtype"><b>Event Type</b></label>
+                                <select name="id" >
+                                    <option th:each="eventType :${eventType}"
+                                            th:text="${eventType.eventType}"
+                                            th:value="${eventType.id}"
+
+                                    ></option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+
+    </div>
+
+
+</div>
+</div>
+
+<script>
+    CKEDITOR.replace('eventDescription');
+
+</script>
+
+<div th:include="/admin/adminfooter.html" xmlns:th="http://www.w3.org/1999/xhtml"></div>

@@ -1,0 +1,56 @@
+<div th:include="/admin/adminheader.html" xmlns:th="http://www.w3.org/1999/xhtml"></div>
+<script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <h1 class="h3 mb-2 text-gray-800">View and Edit your Teams</h1>
+  <p class="mb-4">Chart.js is a third party plugin that is used to generate the charts in this theme. The charts below have been customized - for further customization options, please visit the <a target="_blank" href="https://www.chartjs.org/docs/latest/">official Chart.js documentation</a>.</p>
+  <!-- Content Row -->
+  <div class="row">
+
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="alert alert-dark" role="alert" th:text="${message}">
+          </div>
+          <form th:action="@{/admin/editteamdata}" method="post">
+            <input  type="hidden" name="eventId" th:value="${singleTeam!=null}?${singleTeam.teamid}:''">
+            <div class="form-group">
+              <label for="exampleInputEmail1"><b>Team Name*</b></label>
+              <input type="text" class="form-control" name="eventName" id="exampleInputEmail1"
+                     aria-describedby="emailHelp" placeholder="eg: How to do moonwalk." th:value="${singleTeam!=null}?${singleTeam.teamName}:''">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1"><b>Team Motto*</b></label>
+              <input type="text" class="form-control" id="exampleInputEmail" name="eventLocation"
+                     placeholder="eg: a walkthrough" th:value="${singleTeam!=null}?${singleTeam.teamMotto}:''" >
+            </div>
+            <table class="table">
+              <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Members Name</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr th:each="teamMembers :${teamMembers}">
+                <td th:text="${teamMembers.teammemberName}"></td>
+                <td>
+                  <a th:href="@{|/admin/delete/teamMember/${teamMembers.id}|}"><i class="fas fa-trash"></i></a>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+</div>
+<script>
+  CKEDITOR.replace('eventdescription');
+</script>
+<div th:include="/admin/adminfooter.html" xmlns:th="http://www.w3.org/1999/xhtml"></div>

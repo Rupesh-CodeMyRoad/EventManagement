@@ -1,0 +1,52 @@
+<div th:include="/admin/adminheader.html" xmlns:th="http://www.w3.org/1999/xhtml"></div>
+
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <h1 class="h3 mb-2 text-gray-800">Add Your Events</h1>
+  <p class="mb-4">Chart.js is a third party plugin that is used to generate the charts in this theme. The charts below have been customized - for further customization options, please visit the <a target="_blank" href="https://www.chartjs.org/docs/latest/">official Chart.js documentation</a>.</p>
+
+  <!-- Content Row -->
+  <div class="row">
+
+
+
+      <table class="table">
+        <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Date</th>
+          <th scope="col">Location</th>
+          <th scope="col">Description</th>
+          <th scope="col">EventType</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="event :${eventList}">
+          <td th:text="${event.id}"></td>
+          <td th:text="${event.eventName}"></td>
+          <td th:text="${event.eventDate}"></td>
+          <td th:text="${event.eventLocation}"></td>
+          <td th:text="${event.eventDescription}"></td>
+          <td th:text="${event.eventType.eventType}"></td>
+          <td>
+            <a th:href="@{|/admin/edit/event/${event.id}|}"> <i class="fa fa-edit"></i></a>
+            <a th:href="@{|/admin/delete/event/${event.id}|}"><i class="fas fa-trash"></i></a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+
+    </div>
+
+  </div>
+
+
+
+</div>
+
+
+
+<div th:include="/admin/adminfooter.html" xmlns:th="http://www.w3.org/1999/xhtml"></div>

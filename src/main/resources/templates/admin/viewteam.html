@@ -1,0 +1,67 @@
+<div th:include="/admin/adminheader.html" xmlns:th="http://www.w3.org/1999/xhtml"></div>
+
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <h1 class="h3 mb-2 text-gray-800">Your Teams</h1>
+  <p class="mb-4">Chart.js is a third party plugin that is used to generate the charts in this theme. The charts below have been customized - for further customization options, please visit the <a target="_blank" href="https://www.chartjs.org/docs/latest/">official Chart.js documentation</a>.</p>
+
+  <!-- Content Row -->
+  <div class="row">
+    <table class="table">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Team Name</th>
+        <th scope="col">Team Moto</th>
+        <th scope="col">Team Members</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="team :${teamList}">
+        <td th:text="${team.id}"></td>
+        <td th:text="${team.teamName}"></td>
+        <td th:text="${team.teamMotto}"></td>
+        <td>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            View Members
+          </button>
+
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Team Members</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  ...
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <a th:href="@{|/admin/edit/team/${team.id}|}"> <i class="fa fa-edit"></i></a>
+          <a th:href="@{|/admin/delete/team/${team.id}|}"><i class="fas fa-trash"></i></a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+
+  </div>
+
+
+</div>
+</div>
+
+
+
+<div th:include="/admin/adminfooter.html" xmlns:th="http://www.w3.org/1999/xhtml"></div>
